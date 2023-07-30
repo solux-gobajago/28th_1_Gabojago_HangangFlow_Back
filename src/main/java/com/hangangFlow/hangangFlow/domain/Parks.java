@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 //import java.util.UUID;
 
 @Entity
-@Table(name = "PARK")
+@Table(name = "temppark")
 @NoArgsConstructor
 @Getter
 public class Parks {
