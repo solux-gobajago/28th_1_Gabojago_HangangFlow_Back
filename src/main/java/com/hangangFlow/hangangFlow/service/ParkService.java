@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-//import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -15,19 +15,29 @@ public class ParkService {
 
     private final ParkRepository parkRepository;
 
-//    @Transactional(readOnly = true)
-//    public ParkDTO findPark(int parkNo) {
-//        Parks park = parkRepository.findByParkId(parkNo)
-//                .orElseThrow(() -> new IllegalArgumentException("해당 parkNo에 해당하는 공원이 없습니다. parkNo = " + parkNo));
-//        return new ParkDTO(park);
-//    }
-
     @Transactional(readOnly=true)
-    public ParkDTO findPark(int parkUuid) {
+    public List<Parks> viewParkList(){
+        List<Parks> parkList = parkRepository.findAll();
 
+        return parkList;
+    }
+
+    public List<Parks> searchParkList (List<String> filtering) {
+
+        // filtering된 데이터들을 기준으로 공원 찾기
+        return parkRepository.findAllByParkNameIn(filtering);
+
+    }
+
+
+
+    // 공원 상세 페이지
+    @Transactional(readOnly = true)
+    public ParkDTO findPark(UUID parkUuid) {
         Parks parks = parkRepository.findById(parkUuid).orElseThrow(() ->
                 new IllegalArgumentException("ParkService 오류. parkUuid = " + parkUuid));
 
         return new ParkDTO(parks);
     }
+
 }

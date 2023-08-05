@@ -1,54 +1,43 @@
 package com.hangangFlow.hangangFlow.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-//import java.util.UUID;
+import java.util.UUID;
 
 @Entity
-@Table(name = "temppark")
+@Table(name = "PARK")
 @NoArgsConstructor
 @Getter
 public class Parks {
 
-//    @Id //@GeneratedValue(strategy = GenerationType.IDENTITY)
-//    //@GeneratedValue(generator = "uuid2")
-//    //@GenericGenerator(name = "uuid2", strategy = "uuid2")
-//    @Column(name = "park_uuid", columnDefinition = "BINARY(16)")
     @Id
-    //@GeneratedValue
-    //@Column(name = "park_uuid", columnDefinition = "BINARY(16)")
-    @Column(name = "park_uuid")
-    //private UUID parkUuid;
-    private int parkUuid;
+    @Column(name = "park_uuid", columnDefinition = "BINARY(16)")
+    private UUID parkUuid;
 
-    @NotNull
-    private int parkNo;
-
-    @NotNull
+    @Column(name = "park_name", nullable = false)
     private String parkName;
 
-    @NotNull
+    @Column(name = "park_address", nullable = false)
     private String parkAddress;
 
+    @Column(name = "park_phone_num")
     private String parkPhoneNum;
 
+    @Column(name = "park_info", columnDefinition = "LONGTEXT")
     private String parkInfo;
 
-    @NotNull
+    @Column(nullable = false)
     private double latitude;
 
-    @NotNull
+    @Column(nullable = false)
     private double longitude;
 
     @Builder
-    //public Parks(UUID parkUuid, int parkNo, String parkName, String parkAddress, String parkPhoneNum, String parkInfo, double latitude, double longitude) {
-    public Parks(int parkUuid, int parkNo, String parkName, String parkAddress, String parkPhoneNum, String parkInfo, double latitude, double longitude) {
+    public Parks(UUID parkUuid, String parkName, String parkAddress, String parkPhoneNum, String parkInfo, double latitude, double longitude) {
         this.parkUuid = parkUuid;
-        this.parkNo = parkNo;
         this.parkName = parkName;
         this.parkAddress = parkAddress;
         this.parkPhoneNum = parkPhoneNum;
@@ -56,4 +45,5 @@ public class Parks {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+
 }
