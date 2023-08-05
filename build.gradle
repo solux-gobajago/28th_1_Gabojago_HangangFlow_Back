@@ -11,6 +11,14 @@ java {
 	sourceCompatibility = '17'
 }
 
+//////
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+//////
+
 repositories {
 	mavenCentral()
 }
@@ -20,7 +28,6 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
   
   implementation 'org.springframework.boot:spring-boot-starter-web'
-  implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	testImplementation ('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
@@ -32,18 +39,22 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+  
+  implementation 'org.springframework.boot:spring-boot-starter-security'
+
 	implementation 'org.springframework.security:spring-security-config'
 	testImplementation 'org.springframework.security:spring-security-test'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation "com.h2database:h2"
+	//implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+	//implementation 'com.vladmihalcea:hibernate-types:2.13.0'
 
-	annotationProcessor('org.projectlombok:lombok')
-	testAnnotationProcessor('org.projectlombok:lombok')
+	implementation 'javax.xml.bind:jaxb-api:2.3.1'
 
-//	implementation 'org.mariadb.jdbc:mariadb-java-client:버전번호'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+  //	implementation 'org.mariadb.jdbc:mariadb-java-client:버전번호'
+  implementation "com.h2database:h2"
+
 }
 
 tasks.named('test') {
