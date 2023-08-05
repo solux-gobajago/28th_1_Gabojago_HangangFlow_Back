@@ -22,6 +22,20 @@ dependencies {
     testImplementation ('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	implementation 'org.projectlombok:lombok'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.security:spring-security-config'
+	testImplementation 'org.springframework.security:spring-security-test'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation "com.h2database:h2"
+
+	annotationProcessor('org.projectlombok:lombok')
+	testAnnotationProcessor('org.projectlombok:lombok')
+
+//	implementation 'org.mariadb.jdbc:mariadb-java-client:버전번호'
+}
 
 tasks.named('test') {
 	useJUnitPlatform()
