@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.UUID;
 
 @Entity
-@Table(name = "PARK")
+@Table(name = "park")
 @NoArgsConstructor
 @Getter
 public class Parks {
