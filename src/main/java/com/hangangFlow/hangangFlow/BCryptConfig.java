@@ -1,4 +1,4 @@
-package com.hangangFlow.hangangFlow.config;
+package com.hangangFlow.hangangFlow;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -3,14 +3,12 @@ package com.hangangFlow.hangangFlow.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hangangFlow.hangangFlow.domain.user.UserRole;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Builder
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "user")
