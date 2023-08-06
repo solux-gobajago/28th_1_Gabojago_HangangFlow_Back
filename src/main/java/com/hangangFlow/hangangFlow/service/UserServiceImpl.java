@@ -1,12 +1,13 @@
 package com.hangangFlow.hangangFlow.service;
 
-import com.hangangFlow.hangangFlow.dto.User;
+import com.hangangFlow.hangangFlow.domain.user.User;
 import com.hangangFlow.hangangFlow.domain.user.UserRepository;
 import com.hangangFlow.hangangFlow.domain.user.UserRole;
 import com.hangangFlow.hangangFlow.dto.request.JoinRequest;
 import com.hangangFlow.hangangFlow.dto.request.LoginRequest;
 //import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,15 +24,20 @@ import java.util.List;
 import java.util.UUID;
 
 
+
 //@Lazy
 @Service
+@Component
 @Transactional
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService, UserDetailsService {
 
+//    @Autowired
     private UserRepository userRepository;
+//    @Autowired
     private BCryptPasswordEncoder encoder;
 
+    @Autowired
     public UserServiceImpl(UserRepository userRepository, @Qualifier("passwordEncoder") BCryptPasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.encoder = encoder;

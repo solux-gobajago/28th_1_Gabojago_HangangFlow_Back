@@ -1,6 +1,6 @@
 package com.hangangFlow.hangangFlow.security;
 
-import com.hangangFlow.hangangFlow.dto.User;
+import com.hangangFlow.hangangFlow.domain.user.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

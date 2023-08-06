@@ -3,7 +3,7 @@ package com.hangangFlow.hangangFlow.controller;
 import com.hangangFlow.hangangFlow.dto.request.FindUserIdRequest;
 import com.hangangFlow.hangangFlow.dto.request.JoinRequest;
 import com.hangangFlow.hangangFlow.dto.request.PasswordResetRequest;
-import com.hangangFlow.hangangFlow.dto.User;
+import com.hangangFlow.hangangFlow.domain.user.User;
 import com.hangangFlow.hangangFlow.service.UserService;
 //import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +18,7 @@ import javax.validation.Valid;
 //@RequiredArgsConstructor
 @RequestMapping("/api")
 public class UserController {
+    @Autowired
     private final UserService userService;
 
     @Autowired

@@ -17,12 +17,12 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "com.hangangFlow.hangangFlow.domain.user")
+@EnableJpaRepositories(basePackages = {"com.hangangFlow.hangangFlow.domain.user", "com.hangangFlow.hangangFlow.domain.park"})
 public class JpaConfig {
     @Bean
     public DataSource dataSource(DataSourceProperties dataSourceProperties) {
         return dataSourceProperties.initializeDataSourceBuilder()
-                .url("jdbc:mariadb://solux-server-database.cui0seogsli3.ap-northeast-2.rds.amazonaws.com:3306/db_name")
+                .url("jdbc:mariadb://solux-server-database.cui0seogsli3.ap-northeast-2.rds.amazonaws.com:3306/solux")
                 .username("solux")
                 .password("soluxpw00")
                 .driverClassName("org.mariadb.jdbc.Driver") // MariaDB의 경우 org.mariadb.jdbc.Driver를 사용합니다.

@@ -1,4 +1,5 @@
 package com.hangangFlow.hangangFlow;
+import com.hangangFlow.hangangFlow.domain.user.UserRepository;
 import com.hangangFlow.hangangFlow.service.UserService;
 import com.hangangFlow.hangangFlow.service.UserServiceImpl;
 
@@ -40,61 +41,66 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-@Configuration
-@EnableWebSecurity
-//@AllArgsConstructor
-@EnableJpaRepositories(basePackages = {"com.hangangFlow.hangangFlow.domain.user", "com.hangangFlow.hangangFlow.domain", "com.hangangFlow.hangangFlow.domain.Parks"}) // "com.hangangFlow.hangangFlow.dto.Parks" 패키지를 추가
 
+@EnableWebSecurity
+@EnableJpaRepositories(basePackages = {"com.hangangFlow.hangangFlow.domain.user", "com.hangangFlow.hangangFlow.domain", "com.hangangFlow.hangangFlow.domain.park"}) // "com.hangangFlow.hangangFlow.domain.park.Parks" 패키지를 추가
+@Configuration
 public class SecurityConfig {
 
 //    private final UserServiceImpl userServiceImpl;
     private UserService userService;
+    private UserRepository userRepository;
+    private BCryptPasswordEncoder encoder;
 
-    public SecurityConfig(UserService userService) {
-        this.userService = userService;
+    @Autowired
+    public SecurityConfig(UserRepository userRepository, @Qualifier("passwordEncoder") BCryptPasswordEncoder encoder) {
+        this.userRepository = userRepository;
+        this.encoder = encoder;
     }
 
-//    private UserService userService;
-//    @PostConstruct
-//    public void init() {
-//        this.userService = userService;
-//    }
+
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain springSecurityFilterChain(HttpSecurity http) throws Exception {
+        try {
 
-        // 인가(접근권한) 설정
-        http.authorizeRequests()
-                .dispatcherTypeMatchers(HttpMethod.valueOf("/api/register")).permitAll()
-                .dispatcherTypeMatchers(HttpMethod.valueOf("/api/**")).authenticated();
+            // 인가(접근권한) 설정
+            http.authorizeRequests()
+                    .dispatcherTypeMatchers(HttpMethod.valueOf("/api/register")).permitAll()
+                    .dispatcherTypeMatchers(HttpMethod.valueOf("/api/**")).authenticated();
 
-        // 사이트 위변조 요청 방지 비활성화
-        http.csrf().disable();
+            // 사이트 위변조 요청 방지 비활성화
+            http.csrf().disable();
 
-        // 세션 관리 설정
-        http.sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+            // 세션 관리 설정
+            http.sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        // 로그인 설정
-        http.formLogin()
-                .loginProcessingUrl("/api/login")
-                .defaultSuccessUrl("/api/home")
-                .failureUrl("/api/login?error")
-                .usernameParameter("loginId")
-                .passwordParameter("password");
+            // 로그인 설정
+            http.formLogin()
+                    .loginProcessingUrl("/api/login")
+                    .defaultSuccessUrl("/api/home")
+                    .failureUrl("/api/login?error")
+                    .usernameParameter("loginId")
+                    .passwordParameter("password");
 
-        // 로그아웃 설정
-        http.logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/api/logout"))
-                .logoutSuccessUrl("/api/login?logout")
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID");
+            // 로그아웃 설정
+            http.logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/api/logout"))
+                    .logoutSuccessUrl("/api/login?logout")
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID");
 
-        return http.build();
+            return http.build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error configuring Spring Security.", e);
+        }
+
     }
 
     @Bean

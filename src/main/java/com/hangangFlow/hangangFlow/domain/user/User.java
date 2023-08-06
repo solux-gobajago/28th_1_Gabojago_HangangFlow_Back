@@ -1,9 +1,10 @@
-package com.hangangFlow.hangangFlow.dto;
+package com.hangangFlow.hangangFlow.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hangangFlow.hangangFlow.domain.user.UserRole;
 
 import lombok.*;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -14,7 +15,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "User")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) // or GenerationType.UUID

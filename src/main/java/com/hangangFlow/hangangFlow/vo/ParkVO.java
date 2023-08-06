@@ -1,6 +1,6 @@
 package com.hangangFlow.hangangFlow.vo;
 
-import com.hangangFlow.hangangFlow.dto.Parks;
+import com.hangangFlow.hangangFlow.domain.park.Parks;
 import lombok.*;
 
 @Data

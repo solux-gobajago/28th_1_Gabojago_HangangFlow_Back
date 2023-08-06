@@ -1,7 +1,7 @@
 //package com.hangangFlow.hangangFlow.service;
 //
 //import com.hangangFlow.hangangFlow.domain.park.ParkRepository;
-//import com.hangangFlow.hangangFlow.dto.Parks;
+//import com.hangangFlow.hangangFlow.domain.park.Parks;
 //import com.hangangFlow.hangangFlow.vo.ParkVO;
 //import lombok.RequiredArgsConstructor;
 //import org.springframework.stereotype.Service;

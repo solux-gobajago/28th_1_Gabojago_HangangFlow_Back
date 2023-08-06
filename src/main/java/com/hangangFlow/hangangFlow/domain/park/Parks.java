@@ -1,4 +1,4 @@
-package com.hangangFlow.hangangFlow.dto;
+package com.hangangFlow.hangangFlow.domain.park;
 
 
 import lombok.*;

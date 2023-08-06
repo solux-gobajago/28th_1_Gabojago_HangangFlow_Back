@@ -1,6 +1,6 @@
 package com.hangangFlow.hangangFlow.service;
 
-import com.hangangFlow.hangangFlow.dto.User;
+import com.hangangFlow.hangangFlow.domain.user.User;
 import com.hangangFlow.hangangFlow.dto.request.JoinRequest;
 import com.hangangFlow.hangangFlow.dto.request.LoginRequest;
 

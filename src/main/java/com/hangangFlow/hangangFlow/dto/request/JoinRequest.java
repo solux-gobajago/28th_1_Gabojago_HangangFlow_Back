@@ -2,7 +2,7 @@ package com.hangangFlow.hangangFlow.dto.request;
 
 import com.hangangFlow.hangangFlow.domain.user.UserRole;
 //import jakarta.validation.constraints.NotBlank;
-import com.hangangFlow.hangangFlow.dto.User;
+import com.hangangFlow.hangangFlow.domain.user.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
