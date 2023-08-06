@@ -15,7 +15,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users")
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) // or GenerationType.UUID
@@ -37,10 +37,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    @JsonProperty("userUuid")
-    public UUID getUserUuid() {
-        return userUuid;
-    }
+//    @JsonProperty("userUuid")
+//    public UUID getUserUuid() {
+//        return userUuid;
+//    }
 
     @JsonProperty("userId")
     public String getUserId() {

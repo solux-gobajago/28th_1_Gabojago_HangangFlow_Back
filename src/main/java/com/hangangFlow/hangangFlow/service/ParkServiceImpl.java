@@ -18,7 +18,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ParkServiceImpl implements ParkService {
 
-//    @Autowired
+
     private ParkRepository parkRepository;
     @Autowired
     public ParkServiceImpl(ParkRepository parkRepository) {
