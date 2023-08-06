@@ -1,19 +1,25 @@
-package com.hangangFlow.hangangFlow.domain;
+package com.hangangFlow.hangangFlow.dto;
 
-import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+//import jakarta.persistence.*;
+import lombok.*;
 
+import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.UUID;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
 @Table(name = "PARK")
 @NoArgsConstructor
-@Getter
 public class Parks {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "park_uuid", columnDefinition = "BINARY(16)")
     private UUID parkUuid;
 
@@ -34,16 +40,5 @@ public class Parks {
 
     @Column(nullable = false)
     private double longitude;
-
-    @Builder
-    public Parks(UUID parkUuid, String parkName, String parkAddress, String parkPhoneNum, String parkInfo, double latitude, double longitude) {
-        this.parkUuid = parkUuid;
-        this.parkName = parkName;
-        this.parkAddress = parkAddress;
-        this.parkPhoneNum = parkPhoneNum;
-        this.parkInfo = parkInfo;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
 
 }

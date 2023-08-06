@@ -14,11 +14,11 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user")
+@Table(name = "User")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) // or GenerationType.UUID
-    @Column(name = "user_uuid")
+    @Column(name = "user_uuid", columnDefinition = "BINARY(16)")
     private UUID userUuid;
 
     @Column(name = "user_id", unique = true)

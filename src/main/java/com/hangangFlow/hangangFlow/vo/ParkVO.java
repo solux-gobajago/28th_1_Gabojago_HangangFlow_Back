@@ -1,6 +1,6 @@
-package com.hangangFlow.hangangFlow.dto;
+package com.hangangFlow.hangangFlow.vo;
 
-import com.hangangFlow.hangangFlow.domain.Parks;
+import com.hangangFlow.hangangFlow.dto.Parks;
 import lombok.*;
 
 @Data
@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 @Setter
 @Getter
-public class ParkDTO {
+public class ParkVO {
     private String parkName;
     private String parkAddress;
     private String parkPhoneNum;
@@ -18,7 +18,7 @@ public class ParkDTO {
     private double latitude;
     private double longitude;
 
-    public ParkDTO(Parks Parks){
+    public ParkVO(Parks Parks){
         this.parkName = Parks.getParkName();
         this.parkAddress = Parks.getParkAddress();
         this.parkPhoneNum = Parks.getParkPhoneNum();

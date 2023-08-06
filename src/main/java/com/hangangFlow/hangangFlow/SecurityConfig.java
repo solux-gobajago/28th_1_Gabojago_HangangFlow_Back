@@ -43,7 +43,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 //@AllArgsConstructor
-@EnableJpaRepositories(basePackages = {"com.hangangFlow.hangangFlow.domain.user", "com.hangangFlow.hangangFlow.domain", "com.hangangFlow.hangangFlow.domain.Parks"}) // "com.hangangFlow.hangangFlow.domain.Parks" 패키지를 추가
+@EnableJpaRepositories(basePackages = {"com.hangangFlow.hangangFlow.domain.user", "com.hangangFlow.hangangFlow.domain", "com.hangangFlow.hangangFlow.domain.Parks"}) // "com.hangangFlow.hangangFlow.dto.Parks" 패키지를 추가
 
 public class SecurityConfig {
 

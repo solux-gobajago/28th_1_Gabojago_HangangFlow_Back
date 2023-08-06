@@ -1,8 +1,8 @@
 package com.hangangFlow.hangangFlow.service;
 
 import com.hangangFlow.hangangFlow.dto.User;
-import com.hangangFlow.hangangFlow.dto.JoinRequest;
-import com.hangangFlow.hangangFlow.dto.LoginRequest;
+import com.hangangFlow.hangangFlow.dto.request.JoinRequest;
+import com.hangangFlow.hangangFlow.dto.request.LoginRequest;
 
 import java.util.UUID;
 

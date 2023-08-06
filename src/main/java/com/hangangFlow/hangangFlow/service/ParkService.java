@@ -1,8 +1,8 @@
 package com.hangangFlow.hangangFlow.service;
 
-import com.hangangFlow.hangangFlow.domain.ParkRepository;
-import com.hangangFlow.hangangFlow.domain.Parks;
-import com.hangangFlow.hangangFlow.dto.ParkDTO;
+import com.hangangFlow.hangangFlow.domain.park.ParkRepository;
+import com.hangangFlow.hangangFlow.dto.Parks;
+import com.hangangFlow.hangangFlow.vo.ParkVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,11 +33,11 @@ public class ParkService {
 
     // 공원 상세 페이지
     @Transactional(readOnly = true)
-    public ParkDTO findPark(UUID parkUuid) {
+    public ParkVO findPark(UUID parkUuid) {
         Parks parks = parkRepository.findById(parkUuid).orElseThrow(() ->
                 new IllegalArgumentException("ParkService 오류. parkUuid = " + parkUuid));
 
-        return new ParkDTO(parks);
+        return new ParkVO(parks);
     }
 
 }

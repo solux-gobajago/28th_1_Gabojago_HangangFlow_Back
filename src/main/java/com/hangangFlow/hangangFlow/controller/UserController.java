@@ -1,8 +1,8 @@
 package com.hangangFlow.hangangFlow.controller;
 
-import com.hangangFlow.hangangFlow.dto.FindUserIdRequest;
-import com.hangangFlow.hangangFlow.dto.JoinRequest;
-import com.hangangFlow.hangangFlow.dto.PasswordResetRequest;
+import com.hangangFlow.hangangFlow.dto.request.FindUserIdRequest;
+import com.hangangFlow.hangangFlow.dto.request.JoinRequest;
+import com.hangangFlow.hangangFlow.dto.request.PasswordResetRequest;
 import com.hangangFlow.hangangFlow.dto.User;
 import com.hangangFlow.hangangFlow.service.UserService;
 //import jakarta.validation.Valid;

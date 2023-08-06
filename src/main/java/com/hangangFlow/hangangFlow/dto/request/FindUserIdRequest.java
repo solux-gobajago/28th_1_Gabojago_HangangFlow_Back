@@ -1,4 +1,4 @@
-package com.hangangFlow.hangangFlow.dto;
+package com.hangangFlow.hangangFlow.dto.request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
