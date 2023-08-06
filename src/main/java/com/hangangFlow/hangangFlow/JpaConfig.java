@@ -17,7 +17,12 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories(basePackages = {"com.hangangFlow.hangangFlow.domain.user", "com.hangangFlow.hangangFlow.domain.park", "com.hangangFlow.hangangFlow.domain.bookmark"})
+@EnableJpaRepositories(basePackages = {
+        "com.hangangFlow.hangangFlow.domain.user",
+        "com.hangangFlow.hangangFlow.domain.park",
+        "com.hangangFlow.hangangFlow.domain.bookmark",
+        "com.hangangFlow.hangangFlow.domain.community"
+})
 public class JpaConfig {
     @Bean
     public DataSource dataSource(DataSourceProperties dataSourceProperties) {
@@ -33,7 +38,7 @@ public class JpaConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource);
-        entityManagerFactoryBean.setPackagesToScan("com.hangangFlow.hangangFlow.domain.user", "com.hangangFlow.hangangFlow.domain.park", "com.hangangFlow.hangangFlow.domain.bookmark");
+        entityManagerFactoryBean.setPackagesToScan("com.hangangFlow.hangangFlow.domain.user", "com.hangangFlow.hangangFlow.domain.park", "com.hangangFlow.hangangFlow.domain.bookmark",  "com.hangangFlow.hangangFlow.domain.community");
 
         JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);

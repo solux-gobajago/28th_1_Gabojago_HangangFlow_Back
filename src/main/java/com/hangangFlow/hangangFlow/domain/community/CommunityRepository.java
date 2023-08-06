@@ -1,4 +1,4 @@
-package com.hangangFlow.hangangFlow.domain;
+package com.hangangFlow.hangangFlow.domain.community;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

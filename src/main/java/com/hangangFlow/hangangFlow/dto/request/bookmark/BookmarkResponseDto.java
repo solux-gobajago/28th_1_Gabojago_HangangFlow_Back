@@ -1,7 +1,7 @@
 package com.hangangFlow.hangangFlow.dto.request.bookmark;
 
 
-import com.hangangFlow.hangangFlow.domain.Bookmark;
+import com.hangangFlow.hangangFlow.domain.bookmark.Bookmark;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

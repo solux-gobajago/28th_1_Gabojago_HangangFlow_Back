@@ -1,6 +1,6 @@
 package com.hangangFlow.hangangFlow.dto.request.bookmark;
 
-import com.hangangFlow.hangangFlow.domain.Bookmark;
+import com.hangangFlow.hangangFlow.domain.bookmark.Bookmark;
 import com.hangangFlow.hangangFlow.domain.park.Parks;
 import com.hangangFlow.hangangFlow.domain.user.User;
 import lombok.Builder;

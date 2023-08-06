@@ -1,12 +1,10 @@
-package com.hangangFlow.hangangFlow.domain;
+package com.hangangFlow.hangangFlow.domain.community;
 
 
 //import jakarta.persistence.*;
 import com.hangangFlow.hangangFlow.domain.user.User;
 import com.hangangFlow.hangangFlow.domain.park.Parks;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -17,8 +15,12 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
+@Builder
 @Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Table(name="community")
 public class Community {
 
     @Id

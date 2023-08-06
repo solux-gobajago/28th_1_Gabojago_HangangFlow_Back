@@ -1,6 +1,6 @@
 package com.hangangFlow.hangangFlow.vo;
 
-import com.hangangFlow.hangangFlow.domain.Community;
+import com.hangangFlow.hangangFlow.domain.community.Community;
 import lombok.Data;
 
 import java.time.LocalDateTime;

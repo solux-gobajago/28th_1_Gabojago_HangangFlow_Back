@@ -1,6 +1,6 @@
 package com.hangangFlow.hangangFlow.dto;
 
-import com.hangangFlow.hangangFlow.domain.Community;
+import com.hangangFlow.hangangFlow.domain.community.Community;
 import com.hangangFlow.hangangFlow.domain.user.User;
 import com.hangangFlow.hangangFlow.domain.park.Parks;
 
