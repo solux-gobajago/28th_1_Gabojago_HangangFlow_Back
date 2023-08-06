@@ -16,9 +16,16 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class HangangFlowBackApplication {
 
 	public static void main(String[] args) {
-
-		SpringApplication.run(HangangFlowBackApplication.class, args);
-
+		try {
+			SpringApplication.run(HangangFlowBackApplication.class, args);
+		} catch (Exception e) {
+			System.out.println("Error" + e);
+		}
 	}
+
+//	@Bean
+//	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+//		return new BCryptPasswordEncoder();
+//	}
 
 }

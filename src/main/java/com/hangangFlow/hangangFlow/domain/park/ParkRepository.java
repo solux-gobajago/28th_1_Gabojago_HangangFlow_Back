@@ -10,5 +10,7 @@ import java.util.UUID;
 public interface ParkRepository extends JpaRepository<Parks, UUID> {
 
     List<Parks> findAllByParkNameIn(List<String> parkNames);
+    Parks findByParkUuid(UUID parkUuid);
+
 
 }

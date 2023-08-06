@@ -17,9 +17,9 @@ public interface UserService {
     boolean checkUserIdDuplicate(String userId);
 
     /*
-    * 이메일 중복체크
-    * 중복 시 return true
-    * */
+     * 이메일 중복체크
+     * 중복 시 return true
+     * */
     boolean checkEmailDuplicate(String email);
 
     User join(JoinRequest req);

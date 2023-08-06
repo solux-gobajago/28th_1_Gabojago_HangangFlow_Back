@@ -17,6 +17,7 @@ configurations {
 	}
 }
 
+
 repositories {
 	mavenCentral()
 }
@@ -42,6 +43,10 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	testImplementation 'org.springframework.security:spring-security-test'
+	implementation 'junit:junit:4.13.1'
+	implementation group: 'org.qlrm', name: 'qlrm', version: '3.0.1'
+//	implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.5.2'
+//	implementation group: 'org.springframework.security', name: 'spring-security-oauth2-client', version: '5.5.1'
 }
 
 tasks.named('test') {
