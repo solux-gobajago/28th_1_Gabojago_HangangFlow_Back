@@ -3,9 +3,11 @@ package com.hangangFlow.hangangFlow.service;
 import com.hangangFlow.hangangFlow.domain.user.User;
 import com.hangangFlow.hangangFlow.dto.request.JoinRequest;
 import com.hangangFlow.hangangFlow.dto.request.LoginRequest;
+import org.springframework.context.annotation.Lazy;
 
 import java.util.UUID;
 
+@Lazy
 public interface UserService {
 
     /*

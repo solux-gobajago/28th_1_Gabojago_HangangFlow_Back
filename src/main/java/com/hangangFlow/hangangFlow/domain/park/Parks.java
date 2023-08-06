@@ -60,6 +60,6 @@ public class Parks {
     public double getLatitude() {return latitude;}
 
     @JsonProperty("longtitude")
-    public double getLongtitude() {return longitude;}
+    public double getLongitude() {return longitude;}
 
 }

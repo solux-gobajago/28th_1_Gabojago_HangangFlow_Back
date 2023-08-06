@@ -7,25 +7,27 @@ import com.hangangFlow.hangangFlow.domain.user.User;
 import com.hangangFlow.hangangFlow.service.UserService;
 //import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 
+@Lazy
 @RestController
 //@RequiredArgsConstructor
 @RequestMapping("/api")
 public class UserController {
-    @Autowired
+    @Resource
     private final UserService userService;
 
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
     // 회원가입
     @PostMapping("/register")
     public ResponseEntity<User> register(@Valid @RequestBody JoinRequest joinRequest, BindingResult bindingResult) {
