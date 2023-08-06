@@ -1,13 +1,12 @@
 package com.hangangFlow.hangangFlow.controller;
 
-import ch.qos.logback.core.encoder.EchoEncoder;
+
 import com.hangangFlow.hangangFlow.dto.request.FindUserIdRequest;
 import com.hangangFlow.hangangFlow.dto.request.JoinRequest;
 import com.hangangFlow.hangangFlow.dto.request.LoginRequest;
 import com.hangangFlow.hangangFlow.dto.request.PasswordResetRequest;
 import com.hangangFlow.hangangFlow.domain.user.User;
 import com.hangangFlow.hangangFlow.service.UserService;
-//import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
@@ -15,13 +14,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@CrossOrigin(origins = "http://localhost:4000")
 @Lazy
 @RestController
 //@RequiredArgsConstructor
@@ -45,10 +46,10 @@ public class UserController {
                 bindingResult.addError(new FieldError("joinRequest", "userId", "중복된 아이디 입니다"));
             }
 
-//        // 이메일 중복체크
-//        if (userService.checkEmailDuplicate(joinRequest.getEmail())) {
-//            bindingResult.addError(new FieldError("joinRequest", "email", "중복된 이메일입니다"));
-//        }
+            // 이메일 중복체크
+            if (userService.checkEmailDuplicate(joinRequest.getEmail())) {
+                bindingResult.addError(new FieldError("joinRequest", "email", "중복된 이메일입니다"));
+            }
 
             // password와 passwordCheck가 같은지 확인
             if (!joinRequest.getPassword().equals(joinRequest.getPasswordCheck())) {
@@ -65,7 +66,6 @@ public class UserController {
 
             return ResponseEntity.ok(newUser);
         } catch (Exception e) {
-            logger.debug("=======================Error" + e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
 
@@ -116,7 +116,7 @@ public class UserController {
         if (userId == null || password == null || userId.isEmpty() || password.isEmpty()) {
             return ResponseEntity.badRequest().body("아이디와 비밀번호를 입력하세요.");
         }
-        
+
         User user = userService.login(loginRequest);
 
         if (user != null) {
@@ -128,7 +128,13 @@ public class UserController {
 
     // 로그아웃
     @DeleteMapping("/logout")
-    public ResponseEntity<String> logout() {
-        return ResponseEntity.ok("로그아웃 되었습니다.");
+    public ResponseEntity<String> logout(HttpServletRequest request, HttpServletResponse response) {
+
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+
+        return ResponseEntity.ok("로그아웃되었습니다.");
     }
 }
