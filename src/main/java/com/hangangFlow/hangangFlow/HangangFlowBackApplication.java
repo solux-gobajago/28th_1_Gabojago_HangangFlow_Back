@@ -1,5 +1,7 @@
 package com.hangangFlow.hangangFlow;
 
+import com.hangangFlow.hangangFlow.domain.Bookmark;
+import com.hangangFlow.hangangFlow.domain.BookmarkRepository;
 import com.hangangFlow.hangangFlow.domain.park.ParkRepository;
 import com.hangangFlow.hangangFlow.domain.user.UserRepository;
 import com.hangangFlow.hangangFlow.domain.park.Parks;
@@ -10,8 +12,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EntityScan(basePackageClasses = {Parks.class, User.class})
-@EnableJpaRepositories (basePackageClasses = {UserRepository.class, ParkRepository.class})
+@EntityScan(basePackageClasses = {Parks.class, User.class, Bookmark.class})
+@EnableJpaRepositories (basePackageClasses = {UserRepository.class, ParkRepository.class, BookmarkRepository.class})
 
 public class HangangFlowBackApplication {
 
