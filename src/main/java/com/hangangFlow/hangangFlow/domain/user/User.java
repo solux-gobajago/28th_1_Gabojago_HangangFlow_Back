@@ -2,12 +2,14 @@ package com.hangangFlow.hangangFlow.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hangangFlow.hangangFlow.domain.user.UserRole;
-
+//import jakarta.persistence.*;
 import lombok.*;
+
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.persistence.*;
 import java.util.UUID;
+
 
 @Entity
 @Builder

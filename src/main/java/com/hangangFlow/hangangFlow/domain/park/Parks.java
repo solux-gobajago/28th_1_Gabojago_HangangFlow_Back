@@ -13,13 +13,13 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
-@Table(name = "PARK")
+@Table(name = "park")
 @NoArgsConstructor
 @EnableJpaRepositories
 public class Parks {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "park_uuid", columnDefinition = "BINARY(16)")
     private UUID parkUuid;
 
