@@ -2,8 +2,9 @@ package com.hangangFlow.hangangFlow.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hangangFlow.hangangFlow.domain.user.UserRole;
-import jakarta.persistence.*;
 import lombok.*;
+
+import javax.persistence.*;
 
 @Entity
 @Builder

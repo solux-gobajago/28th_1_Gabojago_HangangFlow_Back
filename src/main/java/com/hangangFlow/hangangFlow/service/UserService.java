@@ -5,7 +5,6 @@ import com.hangangFlow.hangangFlow.domain.user.UserRole;
 import com.hangangFlow.hangangFlow.dto.JoinRequest;
 import com.hangangFlow.hangangFlow.dto.LoginRequest;
 import com.hangangFlow.hangangFlow.dto.User;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,12 +5,13 @@ import com.hangangFlow.hangangFlow.dto.JoinRequest;
 import com.hangangFlow.hangangFlow.dto.PasswordResetRequest;
 import com.hangangFlow.hangangFlow.dto.User;
 import com.hangangFlow.hangangFlow.service.UserService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
