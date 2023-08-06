@@ -9,12 +9,20 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class HangangFlowBackApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HangangFlowBackApplication.class, args);
+
+		try {
+			SpringApplication.run(HangangFlowBackApplication.class, args);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+
 	}
 
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+//
+//	@Bean
+//	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+//		return new BCryptPasswordEncoder();
+//	}
 
 }
