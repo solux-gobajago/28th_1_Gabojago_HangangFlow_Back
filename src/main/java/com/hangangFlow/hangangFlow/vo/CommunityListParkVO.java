@@ -1,5 +1,6 @@
 package com.hangangFlow.hangangFlow.vo;
 
+import com.hangangFlow.hangangFlow.domain.Community;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -13,11 +14,11 @@ public class CommunityListParkVO {
     private String parkName;
     private LocalDateTime createAt;
 
-//    public CommunityListParkDto(Community entity) {
-//        this.communityUuid = entity.getCommunityUuid();
-//        this.article = entity.getArticle();
-//        this.userNickname = entity.getUser().getNickname();
-//        this.parkName = entity.getParks().getParkName();
-//        this.createAt = entity.getCreateAt();
-//    }
+    public CommunityListParkVO(Community entity) {
+        this.communityUuid = entity.getCommunityUuid();
+        this.article = entity.getArticle();
+        this.userNickname = entity.getUser().getNickname();
+        this.parkName = entity.getParks().getParkName();
+        this.createAt = entity.getCreateAt();
+    }
 }

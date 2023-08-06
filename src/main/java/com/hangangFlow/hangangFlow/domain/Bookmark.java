@@ -1,9 +1,12 @@
-package com.hangangFlow.hangangFlow.domain.bookmark;
-import com.hangangFlow.hangangFlow.domain.user.User;
+package com.hangangFlow.hangangFlow.domain;
 import com.hangangFlow.hangangFlow.domain.park.Parks;
-import lombok.*;
+import com.hangangFlow.hangangFlow.domain.user.User;
+import lombok.Builder;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
 //import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -11,12 +14,8 @@ import javax.persistence.*;
 
 
 @Entity
-@Builder
 @Getter
-@Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "bookmark")
 public class Bookmark {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,8 +30,8 @@ public class Bookmark {
     @JoinColumn(name = "park_uuid")
     private Parks parks;
 
-//    @CreationTimestamp
-//    private LocalDateTime createAt = LocalDateTime.now();
+    @CreationTimestamp
+    private LocalDateTime createAt = LocalDateTime.now();
 
     @Builder
     public Bookmark(User user, Parks parks) {

@@ -5,6 +5,7 @@ import com.hangangFlow.hangangFlow.domain.CommunityRepository;
 import com.hangangFlow.hangangFlow.domain.park.Parks;
 import com.hangangFlow.hangangFlow.domain.user.User;
 import com.hangangFlow.hangangFlow.dto.*;
+
 import com.hangangFlow.hangangFlow.vo.CommunityListParkVO;
 import com.hangangFlow.hangangFlow.vo.CommunityListVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,9 +67,10 @@ public class CommunityServiceImpl implements CommunityService {
     //게시글 목록 최신순 조회
     @Override
     public List<CommunityListVO> findAllDesc() {
-        return communityRepository.findAllDesc().stream()
+        List<CommunityListVO> collect = communityRepository.findAllDesc().stream()
                 .map(CommunityListVO::new)
                 .collect(Collectors.toList());
+        return collect;
     }
 
     //게시글 목록 카테고리별 조회
