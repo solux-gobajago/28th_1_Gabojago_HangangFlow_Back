@@ -39,6 +39,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsUtils;
 
 import javax.annotation.Resource;
 
@@ -49,44 +50,81 @@ import javax.annotation.Resource;
 @Configuration
 public class SecurityConfig {
 
-
     @Bean
-    public SecurityFilterChain springSecurityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                // Request
+                .authorizeRequests()
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+//                .antMatchers(
+//                        "/api/login", "/api/register"
+//                ).permitAll()
+                .anyRequest().hasAnyRole("USER")
+                .and()
+                // 사용하지 않는 필터
+                .formLogin()
+                .disable()
+                .csrf()
+                .disable()
+                .headers()
+                .disable()
+                .httpBasic()
+                .disable()
+                .rememberMe()
+                .disable()
+                .logout()
+                .disable()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//                .and()
+                // 인증/인가 실패 Response
+//                .exceptionHandling()
+//                .authenticationEntryPoint(authenticationEntryPoint(objectMapper()))
+//                .accessDeniedHandler(accessDeniedHandler(objectMapper()))
+//                .and()
+                // Redis Session
+//                .addFilterBefore(userAuthenticationFilter(),
+//                        UsernamePasswordAuthenticationFilter.class)
+                // CORS
+//                .cors().configurationSource(corsConfigurationSource());
 
-            // 인가(접근권한) 설정
-//            http.authorizeRequests()
-////                    .antMatchers(HttpMethod.POST.valueOf("/api/register")).permitAll()
-//                    .antMatchers(HttpMethod.valueOf("/api/**")).authenticated();
-
-            // 사이트 위변조 요청 방지 비활성화
-            http.csrf().disable();
-
-            // 세션 관리 설정
-            http.sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-            // 로그인 설정
-            http.formLogin()
-                    .loginProcessingUrl("/api/login")
-                    .defaultSuccessUrl("/api/home")
-                    .failureUrl("/api/login?error")
-                    .usernameParameter("loginId")
-                    .passwordParameter("password");
-
-            // 로그아웃 설정
-            http.logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/api/logout"))
-                    .logoutSuccessUrl("/api/login?logout")
-                    .invalidateHttpSession(true)
-                    .deleteCookies("JSESSIONID");
-
-            return http.build();
-
-
+        return http.build();
     }
 
+//
 //    @Bean
-//    public BCryptPasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
+//    public SecurityFilterChain springSecurityFilterChain(HttpSecurity http) throws Exception {
+//
+//            // 인가(접근권한) 설정
+////            http.authorizeRequests()
+//////                    .antMatchers(HttpMethod.POST.valueOf("/api/register")).permitAll()
+////                    .antMatchers(HttpMethod.valueOf("/api/**")).authenticated();
+//
+//            // 사이트 위변조 요청 방지 비활성화
+//            http.csrf().disable();
+//
+//            // 세션 관리 설정
+//            http.sessionManagement()
+//                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//
+//            // 로그인 설정
+//            http.formLogin()
+//                    .loginProcessingUrl("/api/login")
+//                    .defaultSuccessUrl("/api/home")
+//                    .failureUrl("/api/login?error")
+//                    .usernameParameter("loginId")
+//                    .passwordParameter("password");
+//
+//            // 로그아웃 설정
+//            http.logout()
+//                    .logoutRequestMatcher(new AntPathRequestMatcher("/api/logout"))
+//                    .logoutSuccessUrl("/api/login?logout")
+//                    .invalidateHttpSession(true)
+//                    .deleteCookies("JSESSIONID");
+//
+//            return http.build();
+//
+//
 //    }
+//
 }
