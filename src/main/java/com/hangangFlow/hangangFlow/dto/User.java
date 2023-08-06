@@ -2,8 +2,11 @@ package com.hangangFlow.hangangFlow.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hangangFlow.hangangFlow.domain.user.UserRole;
-import jakarta.persistence.*;
+
 import lombok.*;
+
+import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Builder
@@ -14,9 +17,9 @@ import lombok.*;
 @Table(name = "user")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO) // or GenerationType.UUID
     @Column(name = "user_uuid")
-    private Long userUuid;
+    private UUID userUuid;
 
     @Column(name = "user_id", unique = true)
     private String userId;
@@ -34,7 +37,7 @@ public class User {
     private UserRole role;
 
     @JsonProperty("userUuid")
-    public Long getUserUuid() {
+    public UUID getUserUuid() {
         return userUuid;
     }
 

@@ -1,5 +1,6 @@
 package com.hangangFlow.hangangFlow.domain.user;
 
+import com.hangangFlow.hangangFlow.dto.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

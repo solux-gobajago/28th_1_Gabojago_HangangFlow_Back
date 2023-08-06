@@ -1,10 +1,12 @@
 package com.hangangFlow.hangangFlow.dto;
 
 import com.hangangFlow.hangangFlow.domain.user.UserRole;
-import jakarta.validation.constraints.NotBlank;
+//import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter

@@ -8,20 +8,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /*
 * UserDetails
 * 사용자 정보 담는 인터페이스 */
 @Data
 public class PrincipalDetails implements UserDetails {
-    private static final Logger logger = LoggerFactory.getLogger(PrincipalDetails.class);
+//    private static final Logger logger = LoggerFactory.getLogger(PrincipalDetails.class);
     private User user;
 
     public PrincipalDetails(User user) {
         this.user = user;
-        logger.info("PrincipalDetails created with User: {}", user);
+//        logger.info("PrincipalDetails created with User: {}", user);
     }
 
     // 권한 작업을 위한 role return
@@ -31,7 +28,7 @@ public class PrincipalDetails implements UserDetails {
         collections.add(() -> {
             return user.getRole().name();
         });
-        logger.debug("User role: {}", user.getRole());
+//        logger.debug("User role: {}", user.getRole());
         return collections;
     }
 
