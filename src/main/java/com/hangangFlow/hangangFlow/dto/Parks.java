@@ -1,21 +1,21 @@
 package com.hangangFlow.hangangFlow.dto;
 
-//import jakarta.persistence.*;
+
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.persistence.*;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.UUID;
 
 @Entity
+@Builder
 @Getter
 @Setter
 @AllArgsConstructor
 @Table(name = "PARK")
 @NoArgsConstructor
+@EnableJpaRepositories
 public class Parks {
 
     @Id
@@ -40,5 +40,26 @@ public class Parks {
 
     @Column(nullable = false)
     private double longitude;
+
+    @JsonProperty("parkUuid")
+    public UUID getParkUuid() {return parkUuid;}
+
+    @JsonProperty("parkName")
+    public String getParkName() {return parkName;}
+
+    @JsonProperty("parkAddress")
+    public String getParkAddress() {return parkAddress;}
+
+    @JsonProperty("parkPhoneNum")
+    public String getParkPhoneNum() {return parkPhoneNum;}
+
+    @JsonProperty("parkInfo")
+    public String getParkInfo() {return parkInfo;}
+
+    @JsonProperty("latitude")
+    public double getLatitude() {return latitude;}
+
+    @JsonProperty("longtitude")
+    public double getLongtitude() {return longitude;}
 
 }
