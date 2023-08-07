@@ -38,7 +38,7 @@ public class ParkController {
         // MariaDB에서 데이터 찾기
         List<Parks> result = parkService.searchParkList(parkUuidList);
 
-        // ParkDTO로 변환하여 반환
+        // ParkVO로 변환하여 반환
         return result.stream().map(ParkVO::new).collect(Collectors.toList());
     }
 
