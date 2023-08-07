@@ -25,17 +25,19 @@ public class Community {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "BINARY(16)")
+    @Column(name = "community_uuid",columnDefinition = "BINARY(16)")
     private UUID communityUuid;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "article",columnDefinition = "LONGTEXT")
     private String article;
 
     @CreationTimestamp
-    private LocalDateTime createAt = LocalDateTime.now();
+    @Column(name = "created_at")
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @UpdateTimestamp
-    private LocalDateTime updateAt = LocalDateTime.now();
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "user_uuid")
@@ -44,6 +46,12 @@ public class Community {
     @OneToOne
     @JoinColumn(name = "park_uuid")
     private Parks parks;
+
+    @Column(name = "like_count",columnDefinition = "BIGINT")
+    private int likeCount;
+
+    @Column(name = "soft_delete")
+    private LocalDateTime softDelete;
 
     @Builder
     public Community(String article, User user, Parks parks) {
