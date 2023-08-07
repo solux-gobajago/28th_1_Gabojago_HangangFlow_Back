@@ -10,13 +10,13 @@ import java.util.UUID;
 public class CommunityResponseDto {
     private UUID communityUuid;
     private String article;
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
     private String userNickname;
 
     public CommunityResponseDto(Community entity) {
         this.communityUuid = entity.getCommunityUuid();
         this.article= entity.getArticle();
-        this.createAt = entity.getCreateAt();
+        this.createdAt = entity.getCreatedAt();
         this.userNickname = entity.getUser().getNickname();
 
     }

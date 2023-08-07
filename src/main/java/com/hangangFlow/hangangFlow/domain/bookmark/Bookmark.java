@@ -20,7 +20,7 @@ import javax.persistence.*;
 public class Bookmark {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(columnDefinition = "BINARY(16)")
+    @Column(name = "bookmark_uuid",columnDefinition = "BINARY(16)")
     private UUID bookmarkUuid;
 
     @ManyToOne
@@ -31,8 +31,9 @@ public class Bookmark {
     @JoinColumn(name = "park_uuid")
     private Parks parks;
 
-//    @CreationTimestamp
-//    private LocalDateTime createAt = LocalDateTime.now();
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @Builder
     public Bookmark(User user, Parks parks) {

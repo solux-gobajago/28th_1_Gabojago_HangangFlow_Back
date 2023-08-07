@@ -19,6 +19,7 @@ import java.util.UUID;
 //@RequiredArgsConstructor
 @RestController
 @Lazy
+@RequestMapping("/api")
 
 public class CommunityController {
     @Resource
@@ -43,20 +44,20 @@ public class CommunityController {
     }
 
     //게시글 내용 수정
-    @PutMapping("/community/{id}/article")
+    @PutMapping("/community/{communityUuid}/article")
     public void updateCommunity(@PathVariable UUID communityUuid,
                        @RequestBody CommunityUpdateRequestDto article) {
         communityService.updateCommunity(communityUuid, article);
     }
 
     //게시글 삭제
-    @DeleteMapping("/community/{id}/article")
+    @DeleteMapping("/community/{communityUuid}/article")
     public void deleteCommunity(@PathVariable UUID communityUuid) {
        communityService.deleteCommunity(communityUuid);
     }
 
     //게시글 내용 조회
-    @GetMapping("/community/{id}")
+    @GetMapping("/community/{communityUuid}")
     public CommunityResponseDto findCommunity (@PathVariable UUID communityUuid){
         return communityService.findCommunity(communityUuid);
     }
