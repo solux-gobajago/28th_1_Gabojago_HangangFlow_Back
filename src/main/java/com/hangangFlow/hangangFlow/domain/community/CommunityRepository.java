@@ -12,11 +12,11 @@ import java.util.UUID;
 
 public interface CommunityRepository extends JpaRepository<Community, UUID> {
     // 작성 날짜 순 정렬
-    @Query("SELECT c FROM Community c ORDER BY c.createAt DESC")
+    @Query("SELECT c FROM Community c ORDER BY c.createdAt DESC")
     List<Community> findAllDesc();
 
     // parkUuid에 해당하는 Community 목록 조회, 작성 날짜 순 정렬
-    @Query("SELECT c FROM Community c JOIN FETCH c.parks WHERE c.parks.parkName = :parkName ORDER BY c.createAt DESC")
+    @Query("SELECT c FROM Community c JOIN FETCH c.parks WHERE c.parks.parkName = :parkName ORDER BY c.createdAt DESC")
     List<Community> findAllByParkNameWithFetchJoin(@Param("parkName") String parkName);
 
 }

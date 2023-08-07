@@ -20,7 +20,7 @@ import java.util.UUID;
 //@RequiredArgsConstructor
 @Lazy
 @RestController
-
+@RequestMapping("/api")
 public class BookmarkController {
 
 //    private final BookmarkServiceImpl bookmarkServiceImpl;
