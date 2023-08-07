@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.UUID;
 
 //@RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4000")
+
 @RestController
 @Lazy
 @RequestMapping("/api")
