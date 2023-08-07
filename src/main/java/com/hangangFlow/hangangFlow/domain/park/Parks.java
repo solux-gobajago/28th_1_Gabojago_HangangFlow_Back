@@ -19,7 +19,7 @@ import java.util.UUID;
 public class Parks {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "park_uuid", columnDefinition = "BINARY(16)")
     private UUID parkUuid;
 
@@ -59,7 +59,7 @@ public class Parks {
     @JsonProperty("latitude")
     public double getLatitude() {return latitude;}
 
-    @JsonProperty("longtitude")
+    @JsonProperty("longitude")
     public double getLongitude() {return longitude;}
 
 }

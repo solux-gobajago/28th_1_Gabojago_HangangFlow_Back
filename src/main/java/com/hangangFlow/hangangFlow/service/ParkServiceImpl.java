@@ -18,8 +18,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class ParkServiceImpl implements ParkService {
 
-
     private ParkRepository parkRepository;
+
     @Autowired
     public ParkServiceImpl(ParkRepository parkRepository) {
         this.parkRepository = parkRepository;
@@ -33,11 +33,9 @@ public class ParkServiceImpl implements ParkService {
     }
 
     @Override
-    public List<Parks> searchParkList (List<String> filtering) {
+    public List<Parks> searchParkList(List<UUID> parkUuids) {
 
-        // filtering된 데이터들을 기준으로 공원 찾기
-        return parkRepository.findAllByParkNameIn(filtering);
-
+        return parkRepository.findAllById(parkUuids);
     }
 
     @Override
