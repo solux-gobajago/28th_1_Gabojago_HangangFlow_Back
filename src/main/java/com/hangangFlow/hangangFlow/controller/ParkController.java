@@ -24,9 +24,9 @@ public class ParkController {
     @GetMapping("/parklist")
     public List<ParkVO> listPark() {
         List<Parks> parkList = parkService.viewParkList();
-        List<ParkVO> parkListDTO = parkList.stream().map(ParkVO::new).collect(Collectors.toList());
+        List<ParkVO> parkListVO = parkList.stream().map(ParkVO::new).collect(Collectors.toList());
 
-        return parkListDTO;
+        return parkListVO;
     }
 
     // flask 통해서 공원 리스트
