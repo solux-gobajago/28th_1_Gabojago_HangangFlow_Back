@@ -3,14 +3,17 @@ package com.hangangFlow.hangangFlow.controller;
 import com.hangangFlow.hangangFlow.domain.park.Parks;
 import com.hangangFlow.hangangFlow.service.ParkService;
 import com.hangangFlow.hangangFlow.vo.ParkVO;
-//import com.hangangFlow.hangangFlow.service.ParkServicetemp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -21,40 +24,97 @@ public class ParkController {
 
     @Autowired
     private final ParkService parkService;
-    @GetMapping("/parklist")
+
+    @Autowired
+    private final RestTemplate restTemplate;
+    @GetMapping("/parkList")
     public List<ParkVO> listPark() {
         List<Parks> parkList = parkService.viewParkList();
-        List<ParkVO> parkListDTO = parkList.stream().map(ParkVO::new).collect(Collectors.toList());
+        List<ParkVO> parkListVO = parkList.stream().map(ParkVO::new).collect(Collectors.toList());
 
-        return parkListDTO;
+        return parkListVO;
     }
-
-
 
     // flask 통해서 공원 리스트
     // keywords에 flask의 JSON 데이터가 들어감
-    @PostMapping("/searchpark")
-    public List<ParkVO> searchPark(@RequestBody List<String> keywords) {
+//    @GetMapping("/searchpark")
+//    public List<ParkVO> searchPark(@RequestBody Map<String, List<UUID>> requestBody) {
+//        List<UUID> parkUuidList = requestBody.get("park_uuid");
+//
+//        // MariaDB에서 데이터 찾기
+//        List<Parks> result = parkService.searchParkList(parkUuidList);
+//
+//        // ParkVO로 변환하여 반환
+//        return result.stream().map(ParkVO::new).collect(Collectors.toList());
+//    }
 
-        // Flask에서 받아온 데이터를 기준으로 공원 이름들을 생성
-        List<String> transformedKeywords = keywords.stream()
-                .map(keyword -> keyword + "한강공원")
-                .collect(Collectors.toList());
+//    @GetMapping("/searchPark")
+//    public ResponseEntity<List<ParkVO> searchPark(@RequestParam String params) {
+//        List<String> keywordList = ArrayList.
+//    }
 
-        // MariaDB에서 데이터 찾기
-        List<Parks> result = parkService.searchParkList(transformedKeywords);
+//    private final RestTemplate restTemplate;
+//    private final ParkService parkService; // 추가: ParkService 주입
 
-        // ParkDTO로 변환하여 반환
-        return result.stream().map(ParkVO::new).collect(Collectors.toList());
+//    @GetMapping("")
+//    public ResponseEntity<List<Parks>> searchPark(@RequestParam List<String> keyword) {
+//        String flaskApiUrl = "http://localhost:8000/data?keyword=" + String.join(",", keyword);
+//        System.out.println("checkLog--- flaskApiUrl" + flaskApiUrl);
+//        try {
+//            ResponseEntity<Map<String, List<String>>> flaskResponse = restTemplate.exchange(
+//                    flaskApiUrl,
+//                    HttpMethod.GET,
+//                    null,
+//                    new ParameterizedTypeReference<Map<String, List<String>>>() {}
+//            );
+//
+//            List<String> uuidList = flaskResponse.getBody().get("park_uuid");
+//            System.out.println("checkLog--- uuidList" + uuidList);
+//
+//            List<UUID> parkUuidList = uuidList.stream()
+//                    .map(UUID::fromString)
+//                    .collect(Collectors.toList());
+//            System.out.println("checkLog--- parkUuidList" + uuidList);
+//
+//            List<Parks> parkList = parkService.searchParkList(parkUuidList); // 수정: ParkService의 메서드 활용
+//            System.out.println("checkLog--- parkUuidList" + parkList);
+//            return ResponseEntity.ok(parkList);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//        }
+//    }
+
+    @GetMapping("")
+    public ResponseEntity<List<ParkVO>> searchPark(@RequestParam List<String> keyword) {
+        String flaskApiUrl = "http://localhost:8000/data?keyword=" + String.join(",", keyword);
+        System.out.println("checkLog--- flaskApiUrl" + flaskApiUrl);
+        try {
+            ResponseEntity<Map<String, List<String>>> flaskResponse = restTemplate.exchange(
+                    flaskApiUrl,
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<Map<String, List<String>>>() {}
+            );
+
+            List<String> uuidList = flaskResponse.getBody().get("park_uuid");
+            System.out.println("checkLog--- uuidList" + uuidList);
+
+            List<UUID> parkUuidList = uuidList.stream()
+                    .map(UUID::fromString)
+                    .collect(Collectors.toList());
+            System.out.println("checkLog--- parkUuidList" + parkUuidList);
+
+            List<Parks> parkList = parkService.searchParkList(parkUuidList); // 수정: 공원 정보 가져오기
+
+            List<ParkVO> parkVOList = parkList.stream().map(ParkVO::new).collect(Collectors.toList());
+
+            return ResponseEntity.ok(parkVOList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
-
-
-    // 공원 상세보기
-    @GetMapping("/{parkUuid}")
-    public ParkVO findPark(@PathVariable UUID parkUuid) {
-
-        return parkService.findPark(parkUuid);
-    }
 
 }
