@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,8 +35,16 @@ public class ParkServiceImpl implements ParkService {
 
     @Override
     public List<Parks> searchParkList(List<UUID> parkUuids) {
+        List<Parks> parkList = new ArrayList<>();
 
-        return parkRepository.findAllById(parkUuids);
+        for (UUID parkUuid : parkUuids) {
+            Parks park = parkRepository.findByParkUuid(parkUuid);
+            if (park != null) {
+                parkList.add(park);
+            }
+        }
+
+        return parkList;
     }
 
     @Override
