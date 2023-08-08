@@ -5,6 +5,9 @@ import com.hangangFlow.hangangFlow.service.ParkService;
 import com.hangangFlow.hangangFlow.vo.ParkVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +27,7 @@ public class ParkController {
 
     @Autowired
     private final RestTemplate restTemplate;
-    @GetMapping("/parklist")
+    @GetMapping("/parkList")
     public List<ParkVO> listPark() {
         List<Parks> parkList = parkService.viewParkList();
         List<ParkVO> parkListVO = parkList.stream().map(ParkVO::new).collect(Collectors.toList());
@@ -50,29 +53,68 @@ public class ParkController {
 //        List<String> keywordList = ArrayList.
 //    }
 
-    // 공원 상세보기
-    @GetMapping("/{parkUuid}")
-    public ResponseEntity<List<ParkVO>> searchPark(@RequestParam String keywords) {
+//    private final RestTemplate restTemplate;
+//    private final ParkService parkService; // 추가: ParkService 주입
 
-        String flaskApiUrl = "http://flask-data-server-url/flask-endpoint?keywords=" + keywords;
-        ResponseEntity<String[]> flaskResponse = restTemplate.getForEntity(flaskApiUrl, String[].class);
-        List<UUID> parkUuids = convertUuidStringsToUuids(Arrays.asList(Objects.requireNonNull(flaskResponse.getBody())));
+//    @GetMapping("")
+//    public ResponseEntity<List<Parks>> searchPark(@RequestParam List<String> keyword) {
+//        String flaskApiUrl = "http://localhost:8000/data?keyword=" + String.join(",", keyword);
+//        System.out.println("checkLog--- flaskApiUrl" + flaskApiUrl);
+//        try {
+//            ResponseEntity<Map<String, List<String>>> flaskResponse = restTemplate.exchange(
+//                    flaskApiUrl,
+//                    HttpMethod.GET,
+//                    null,
+//                    new ParameterizedTypeReference<Map<String, List<String>>>() {}
+//            );
+//
+//            List<String> uuidList = flaskResponse.getBody().get("park_uuid");
+//            System.out.println("checkLog--- uuidList" + uuidList);
+//
+//            List<UUID> parkUuidList = uuidList.stream()
+//                    .map(UUID::fromString)
+//                    .collect(Collectors.toList());
+//            System.out.println("checkLog--- parkUuidList" + uuidList);
+//
+//            List<Parks> parkList = parkService.searchParkList(parkUuidList); // 수정: ParkService의 메서드 활용
+//            System.out.println("checkLog--- parkUuidList" + parkList);
+//            return ResponseEntity.ok(parkList);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//        }
+//    }
 
-        List<Parks> parkList = parkService.searchParkList(parkUuids);
+    @GetMapping("")
+    public ResponseEntity<List<ParkVO>> searchPark(@RequestParam List<String> keyword) {
+        String flaskApiUrl = "http://localhost:8000/data?keyword=" + String.join(",", keyword);
+        System.out.println("checkLog--- flaskApiUrl" + flaskApiUrl);
+        try {
+            ResponseEntity<Map<String, List<String>>> flaskResponse = restTemplate.exchange(
+                    flaskApiUrl,
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<Map<String, List<String>>>() {}
+            );
 
-        List<ParkVO> parkVOList = parkList.stream()
-                .map(ParkVO::new)
-                .collect(Collectors.toList());
+            List<String> uuidList = flaskResponse.getBody().get("park_uuid");
+            System.out.println("checkLog--- uuidList" + uuidList);
 
-        return ResponseEntity.ok(parkVOList);
-    }
+            List<UUID> parkUuidList = uuidList.stream()
+                    .map(UUID::fromString)
+                    .collect(Collectors.toList());
+            System.out.println("checkLog--- parkUuidList" + parkUuidList);
 
-    private List<UUID> convertUuidStringsToUuids(List<String> uuidStrings) {
-        List<UUID> uuids = new ArrayList<>();
-        for (String uuidString : uuidStrings) {
-            uuids.add(UUID.fromString(uuidString));
+            List<Parks> parkList = parkService.searchParkList(parkUuidList); // 수정: 공원 정보 가져오기
+
+            List<ParkVO> parkVOList = parkList.stream().map(ParkVO::new).collect(Collectors.toList());
+
+            return ResponseEntity.ok(parkVOList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        return uuids;
     }
+
 
 }

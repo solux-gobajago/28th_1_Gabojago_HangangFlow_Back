@@ -11,4 +11,6 @@ public interface ParkRepository extends JpaRepository<Parks, UUID> {
 
     Parks findByParkUuid(UUID parkUuid);
 
+
+
 }
