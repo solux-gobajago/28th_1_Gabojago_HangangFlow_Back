@@ -72,7 +72,7 @@ public class CommunityController {
 
 
     //카테고리별 게시글 목록 조회
-    @GetMapping("/community/{parkUuid}/article")
+    @GetMapping("/community/{parkUuid}/article/category")
     public List<CommunityListParkVO> getCommunityParkList(@PathVariable UUID parkUuid) {
         Parks parks = parkRepository.getById(parkUuid);
         return communityService.findAllPark(parks.getParkName());
