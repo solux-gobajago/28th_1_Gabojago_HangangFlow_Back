@@ -67,4 +67,12 @@ public class ParkController {
         return ResponseEntity.ok(parkVOList);
     }
 
+    private List<UUID> convertUuidStringsToUuids(List<String> uuidStrings) {
+        List<UUID> uuids = new ArrayList<>();
+        for (String uuidString : uuidStrings) {
+            uuids.add(UUID.fromString(uuidString));
+        }
+        return uuids;
+    }
+
 }
