@@ -21,7 +21,9 @@ import java.util.Properties;
         "com.hangangFlow.hangangFlow.domain.user",
         "com.hangangFlow.hangangFlow.domain.park",
         "com.hangangFlow.hangangFlow.domain.bookmark",
-        "com.hangangFlow.hangangFlow.domain.community"
+        "com.hangangFlow.hangangFlow.domain.community",
+        "com.hangangFlow.hangangFlow.domain.likes"
+
 })
 public class JpaConfig {
     @Bean
@@ -38,7 +40,7 @@ public class JpaConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource);
-        entityManagerFactoryBean.setPackagesToScan("com.hangangFlow.hangangFlow.domain.user", "com.hangangFlow.hangangFlow.domain.park", "com.hangangFlow.hangangFlow.domain.bookmark",  "com.hangangFlow.hangangFlow.domain.community");
+        entityManagerFactoryBean.setPackagesToScan("com.hangangFlow.hangangFlow.domain.user", "com.hangangFlow.hangangFlow.domain.park", "com.hangangFlow.hangangFlow.domain.bookmark",  "com.hangangFlow.hangangFlow.domain.community","com.hangangFlow.hangangFlow.domain.likes");
 
         JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
