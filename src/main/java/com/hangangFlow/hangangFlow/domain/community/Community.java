@@ -48,7 +48,7 @@ public class Community {
     private Parks parks;
 
     @Column(name = "like_count",columnDefinition = "BIGINT")
-    private int likeCount;
+    private int likeCount = 0;
 
     @Column(name = "soft_delete")
     private LocalDateTime softDelete;
