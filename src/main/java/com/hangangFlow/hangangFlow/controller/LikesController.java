@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.UUID;
 
+@CrossOrigin(origins = "http://localhost:4000")
+
 @Lazy
 @RestController
 @RequestMapping("/api")
