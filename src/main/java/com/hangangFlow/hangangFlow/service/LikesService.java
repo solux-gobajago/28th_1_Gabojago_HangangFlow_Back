@@ -8,5 +8,7 @@ import java.util.UUID;
 @Lazy
 public interface LikesService {
     void addLikes(UUID communityUuid, UUID userUuid);
+
+    void deleteLikes(UUID communityUuid, UUID likesUuid);
 }
 

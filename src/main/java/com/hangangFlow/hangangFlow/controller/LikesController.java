@@ -1,7 +1,7 @@
 package com.hangangFlow.hangangFlow.controller;
 
 import com.hangangFlow.hangangFlow.domain.community.CommunityRepository;
-import com.hangangFlow.hangangFlow.dto.request.LikesSaveDto;
+import com.hangangFlow.hangangFlow.dto.LikesSaveDto;
 import com.hangangFlow.hangangFlow.service.LikesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -35,4 +35,10 @@ public class LikesController {
 
     }
 
+    @DeleteMapping("/likes/{communityUuid}/{likesUuid}")
+    public ResponseEntity DeleteLikes(@PathVariable UUID communityUuid,
+                                      @PathVariable UUID likesUuid) {
+        likesService.deleteLikes(communityUuid,likesUuid);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }

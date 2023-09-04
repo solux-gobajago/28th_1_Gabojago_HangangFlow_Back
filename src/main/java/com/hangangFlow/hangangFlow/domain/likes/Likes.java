@@ -2,18 +2,17 @@ package com.hangangFlow.hangangFlow.domain.likes;
 
 import com.hangangFlow.hangangFlow.domain.community.Community;
 import com.hangangFlow.hangangFlow.domain.user.User;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.UUID;
 
 @Entity(name = "likes") //이거 이름 안바꿔 주면 충돌남 SQL 예약어라서..
+@Builder
 @Setter
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Likes {
 
     @Id

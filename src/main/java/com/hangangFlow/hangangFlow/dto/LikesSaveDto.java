@@ -1,4 +1,4 @@
-package com.hangangFlow.hangangFlow.dto.request;
+package com.hangangFlow.hangangFlow.dto;
 
 import com.hangangFlow.hangangFlow.domain.community.Community;
 import com.hangangFlow.hangangFlow.domain.likes.Likes;

@@ -1,5 +1,6 @@
 package com.hangangFlow.hangangFlow.domain.community;
 
+import com.hangangFlow.hangangFlow.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,5 +19,8 @@ public interface CommunityRepository extends JpaRepository<Community, UUID> {
     // parkUuid에 해당하는 Community 목록 조회, 작성 날짜 순 정렬
     @Query("SELECT c FROM Community c JOIN FETCH c.parks WHERE c.parks.parkName = :parkName ORDER BY c.createdAt DESC")
     List<Community> findAllByParkNameWithFetchJoin(@Param("parkName") String parkName);
+
+    Community findByCommunityUuid(UUID communityUuid);
+
 
 }

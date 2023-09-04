@@ -11,7 +11,9 @@ import java.util.UUID;
 public interface LikesRepository extends JpaRepository<Likes, UUID> {
     //있는지 없는지 검토
     boolean existsByUserAndCommunity(User user, Community community);
+
+//    boolean existsByCommunityAndLikes(Community community, Likes likes);
     //삭제
-    void deleteByUserAndCommunity(User user, Community community);
+//    void deleteByLikesAndCommunity(Likes likes, Community community);
 
 }

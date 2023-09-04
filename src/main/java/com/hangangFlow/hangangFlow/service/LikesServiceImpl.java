@@ -6,6 +6,7 @@ import com.hangangFlow.hangangFlow.domain.likes.Likes;
 import com.hangangFlow.hangangFlow.domain.likes.LikesRepository;
 import com.hangangFlow.hangangFlow.domain.user.User;
 import com.hangangFlow.hangangFlow.domain.user.UserRepository;
+import com.hangangFlow.hangangFlow.dto.LikesSaveDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -31,19 +32,48 @@ public class LikesServiceImpl implements LikesService {
     }
 
     //좋아요 한번 누르면 +1, 다시 누르면 -1
+//    @Override
+//    public void addLikes(UUID communityUuid,UUID userUuid) {
+////        Optional<Community> optionalCommunity = communityRepository.findById(communityUuid);
+////        Community community = optionalCommunity.orElse(null);
+//        if(!likesRepository.existsByUserAndCommunity(user,community)) {
+//            community.setLikeCount(community.getLikeCount()+1);
+//            Likes likes =
+////            likesRepository.save(new Likes(user, community));
+//
+//        }else {
+////            community.setLikeCount(community.getLikeCount()-1);
+////            likesRepository.deleteByUserAndCommunity(user,community);
+//        }
+
     @Override
     public void addLikes(UUID communityUuid,UUID userUuid) {
         User user = userRepository.findByUserUuid(userUuid);
-        Optional<Community> optionalCommunity = communityRepository.findById(communityUuid);
-        Community community = optionalCommunity.orElse(null);
+        Community community = communityRepository.findByCommunityUuid(communityUuid);
+
+        LikesSaveDto likesSaveDto = LikesSaveDto.builder()
+                .communityUuid(communityUuid)
+                .userUuid(userUuid)
+                .build();
+
         if(!likesRepository.existsByUserAndCommunity(user,community)) {
             community.setLikeCount(community.getLikeCount()+1);
-            likesRepository.save(new Likes(user, community));
+            Likes likes = likesSaveDto.toEntity(user, community);
+            likesRepository.save(likes);
+         }else {
 
-        }else {
-            community.setLikeCount(community.getLikeCount()-1);
-            likesRepository.deleteByUserAndCommunity(user,community);
-        }
+            }
 
     }
+
+    @Override
+    public void deleteLikes(UUID communityUuid, UUID likesUuid) {
+        Likes likes = likesRepository.findById(likesUuid).orElseThrow(() ->
+                new IllegalArgumentException("없습니다. id=" + likesUuid));
+        Optional<Community> optionalCommunity = communityRepository.findById(communityUuid);
+        Community community = optionalCommunity.orElse(null);
+        community.setLikeCount(community.getLikeCount()-1);
+        likesRepository.delete(likes);
+    }
+
 }
