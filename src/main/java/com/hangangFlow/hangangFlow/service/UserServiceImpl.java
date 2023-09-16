@@ -6,10 +6,8 @@ import com.hangangFlow.hangangFlow.domain.user.UserRole;
 import com.hangangFlow.hangangFlow.dto.request.JoinRequest;
 import com.hangangFlow.hangangFlow.dto.request.LoginRequest;
 //import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,10 +15,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -151,6 +147,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 .orElse(null);
 
         return user != null ? user.getUserId() : null;
+    }
+
+    @Override
+    public User findByUserUuid(UUID userUuid) {
+        return userRepository.findByUserUuid(userUuid);
     }
 
 }

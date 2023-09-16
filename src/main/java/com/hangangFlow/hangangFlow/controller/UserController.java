@@ -7,6 +7,7 @@ import com.hangangFlow.hangangFlow.dto.request.LoginRequest;
 import com.hangangFlow.hangangFlow.dto.request.PasswordResetRequest;
 import com.hangangFlow.hangangFlow.domain.user.User;
 import com.hangangFlow.hangangFlow.service.UserService;
+import io.lettuce.core.dynamic.annotation.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,9 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.UUID;
+
 
 @CrossOrigin(origins = "http://localhost:4000")
 @Lazy
@@ -137,4 +141,21 @@ public class UserController {
 
         return ResponseEntity.ok("로그아웃되었습니다.");
     }
+
+    // 회원정보 조회
+    @GetMapping("/user/{userUuid}")
+    public ResponseEntity<User> findByUserUuid(@Valid @PathVariable("userUuid") String userUuidString){
+        try {
+            UUID userUuid = UUID.fromString(userUuidString);
+            User userProfile = userService.findByUserUuid(userUuid);
+            System.out.println("!!!!!!!!!!check"+ userUuid);
+            return ResponseEntity.ok(userProfile);
+        } catch (IllegalArgumentException e) {
+            // 잘못된 UUID 문자열인 경우 처리
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 }

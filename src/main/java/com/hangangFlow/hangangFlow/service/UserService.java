@@ -10,6 +10,8 @@ import java.util.UUID;
 @Lazy
 public interface UserService {
 
+
+
     /*
      * userId 중복체크
      * 중복 시 return true
@@ -33,4 +35,6 @@ public interface UserService {
     boolean resetPassword(String userId, String newPassword);
 
     String findUserId(String email);
+
+    User findByUserUuid(UUID userUuid);
 }
